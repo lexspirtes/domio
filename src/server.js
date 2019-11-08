@@ -1,6 +1,4 @@
 const sqlite3 = require('sqlite3').verbose()
-var http = require('http');
-var request = require('request');
 const fetch = require("node-fetch");
 const emailModule = require('./email.js')
 require('dotenv').config()
@@ -15,6 +13,7 @@ const DB = new sqlite3.Database(process.env.DB_PATH, function(err){
     console.log('Connected to ' + ' database.')
 });
 
+//dbSchema
 dbSchema = `CREATE TABLE IF NOT EXISTS prices (
           id TEXT NOT NULL,
           type TEXT NOT NULL,
@@ -50,7 +49,7 @@ var request = setInterval(function() {
   })
 }, 5000);
 
-//insert function
+//insert function that adds rows to DB
 const insert = (data, time=Date.now()) => {
   const insertString = `INSERT INTO prices(id, type, dynamicDisplayPrice, basePrice, priceDatetime) VALUES
   (?, ?, ?, ?, ?)`
