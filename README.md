@@ -3,6 +3,7 @@
 ## To Run
 - download 
 - go into directory
+- change .env file to desired email accounts
 - npm start
 - to run tests, npm test
 
