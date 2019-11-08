@@ -31,7 +31,7 @@ const mailOptions = (body, subject) => {
 
 /* meetsRequirements
   parameters:
-    data: home object
+    data: property object
   returns:
     bool: true if valid to send email
 */
@@ -45,7 +45,7 @@ emailFunctions.meetsRequirements = function(data) {
 
 /* meetsRequirements
   parameters:
-    data: home object
+    data: property object
   sends email if valid
 */
 emailFunctions.sendEmail = function(data) {
