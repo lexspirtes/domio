@@ -1,11 +1,12 @@
 # domio
 
 ## To Run
-- navigate to src directory
-- change env file to fulfill email parameters
-- node server.js
+- download 
+- go into directory
+- npm start
+- to run tests, npm test
 
-## Decisions
+## Approach 
 - Email handling 
   - nodemailer
 - setInterval 
@@ -16,11 +17,21 @@
   
 
 ## Part III
-In order to accommodate for more rental types, I would:
-- replace my if statement with a meetsRequirements(type) -> bool function that holds the logic for the requirements for each of the types, so that the logic is easily understood and changed. 
-- replace ternary statement with a separate function that creates a subject and body according to the information desired 
+Refactoring Current Code:
+- refactor meetsRequirements into sendNotifications function:
+  - to split into different property types that if valid
+  - would implement the helper functions outlined below, that would actually send the data: this way, if desired, I could get multiple notifications for one property type
+- create additional functions sendSMS(data), sendPush(data)... that would send the appropriate notification
+- replace ternary statement with a function, generateText(data, notificationType) -> String that creates the appropriate text for the notification type and 
+- call sendNotifications instead of sendEmail within server.js
+Additional Needs
+- support for multiple accounts (email, phone), phone number to send sms from 
+- make mobile app to enable push notifications from 
 
 ## Further Implementation
 - more testing
+  - currently I only test the valid statement, I would create testing for:
+    - inserting values into DB
+    - sending emails 
 - filling DB multiple rows at a time
 - change email receiving to accommodate dynamic lists!
