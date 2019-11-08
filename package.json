@@ -1,0 +1,23 @@
+{
+  "name": "domio",
+  "version": "1.0.0",
+  "description": "domio challenge",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha src/test/test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lexspirtes/domio.git"
+  },
+  "author": "Lex Spirtes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lexspirtes/domio/issues"
+  },
+  "homepage": "https://github.com/lexspirtes/domio#readme",
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  }
+}
