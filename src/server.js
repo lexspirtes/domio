@@ -2,17 +2,17 @@ const sqlite3 = require('sqlite3').verbose()
 var http = require('http');
 var request = require('request');
 const fetch = require("node-fetch");
+const emailModule = require('./email.js')
+require('dotenv').config()
 
-//path for DB
-const DB_PATH = '../domio.db'
 
 //connect to db
-const DB = new sqlite3.Database(DB_PATH, function(err){
+const DB = new sqlite3.Database(process.env.DB_PATH, function(err){
     if (err) {
         console.log(err)
         return
     }
-    console.log('Connected to ' + DB_PATH + ' database.')
+    console.log('Connected to ' + ' database.')
 });
 
 dbSchema = `CREATE TABLE IF NOT EXISTS prices (
@@ -32,7 +32,7 @@ DB.exec(dbSchema, function(err){
 
 //request function, runs every five seconds
 var request = setInterval(function() {
-  fetch("https://interview.domio.io/properties/", {
+  fetch(process.env.DOMIO_API, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -45,17 +45,10 @@ var request = setInterval(function() {
   .then((data) => {
     JSON.parse(data).properties.forEach(function(element) {
       insert(element)
-      sendEmail(element)
+    //  emailModule.sendEmail(element)
     })
-    //add to database
-
   })
 }, 5000);
-
-//fake
-const log = (data) => {
-  console.log(data.id)
-}
 
 //insert function
 const insert = (data, time=Date.now()) => {
@@ -68,9 +61,7 @@ const insert = (data, time=Date.now()) => {
     		return console.log(err.message);
   	}
       else {
-        console.log("no error")
+        console.log("inserted")
       }
   });
 }
-
-//send email function
